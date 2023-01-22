@@ -49,6 +49,7 @@ function Menu(props) {
                             href="https://omraval.me"
                             className="btn btn-ghost normal-case text-xl"
                             target="_blank"
+                            rel="noreferrer"
                         >
                             Om Raval
                         </a>
