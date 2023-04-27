@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from "react";
 
 function CountdownTimer() {
-    const [timeLeft, setTimeLeft] = useState({});
-    const targetDate = new Date("April 30, 2023 00:00:00").getTime(); // set target date for the event
+    const [timeLeft, setTimeLeft] = useState({ seconds: 30 }); // set initial time
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            setTimeLeft({ days, hours, minutes, seconds });
+            setTimeLeft((prevTime) => {
+                if (prevTime.seconds === 0) {
+                    // stop the countdown at 0 seconds
+                    clearInterval(intervalId);
+                    return prevTime;
+                } else {
+                    return { seconds: prevTime.seconds - 1 };
+                }
+            });
         }, 1000);
         return () => clearInterval(intervalId);
-    }, [targetDate]);
+    }, []);
 
     return (
-        <div className="font">
+        <div className="font text-[72px] text-[#8400ff] flex flex-col items-center">
+            <p className="text-[black] text-[36px]">Lakshya Fest Starts in </p>
             <p>
-                Time left:{" "}
-                {`${timeLeft.days} days, ${timeLeft.hours} hours, ${timeLeft.minutes} minutes, ${timeLeft.seconds} seconds`}
+                {`${timeLeft.seconds < 10 ? "0" : ""}${timeLeft.seconds}`}{" "}
+                {/* pad with leading 0 if less than 10 seconds */}
             </p>
         </div>
     );
