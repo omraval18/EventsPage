@@ -18,7 +18,7 @@ function CountdownTimer() {
     }, [targetDate]);
 
     return (
-        <div>
+        <div className="font">
             <p>
                 Time left:{" "}
                 {`${timeLeft.days} days, ${timeLeft.hours} hours, ${timeLeft.minutes} minutes, ${timeLeft.seconds} seconds`}
