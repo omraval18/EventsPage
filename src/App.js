@@ -26,7 +26,7 @@ function App() {
             >
                 <CountdownTimer />
             </div>
-            <div className="flex justify-center items-center h-screen">
+            <div className="flex justify-center items-center h-screen max-h-[500px]">
                 <form className="w-full max-w-xs" onSubmit={handleSubmit} autoComplete="off">
                     <h1 className="text-3xl text-center font-bold mb-6">Register</h1>
                     <div className="mb-4">
