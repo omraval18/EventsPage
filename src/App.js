@@ -1,44 +1,28 @@
-import "./App.css";
-import Home from "./Home";
-import { Route, Routes } from "react-router-dom";
-import EventsList from "./EventsList";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import Menu from "./components/Menu";
+import React from "react";
 
-function App() {
-    const [data, setData] = useState([]);
-    const [toggle, setToggle] = useState(false);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.get(
-                    "https://allevents.s3.amazonaws.com/tests/categories.json"
-                );
-                setData(res.data);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        fetchData();
-    }, []);
-
-    console.log("data is here", data);
-
-    function handleToggle() {
-        setToggle(!toggle);
-    }
-
+export default function App() {
     return (
-        <>
-            <Menu data={data} handleToggle={handleToggle} />
-            <Routes>
-                <Route path="/" element={<Home handleClick={toggle} />} />
-                <Route path="/:category" element={<EventsList toggle={toggle} />} />
-            </Routes>
-        </>
+        <div className="w-full flex flex-col justify-center items-center">
+            <span className="countdown">
+                <span style={{ "--value": 56 }}></span>
+            </span>
+            <div className="flex w-full flex-col gap-[20px] justify-center item-center">
+                <input
+                    type="text"
+                    placeholder="Type here"
+                    className="input input-bordered w-full max-w-xs"
+                />
+                <input
+                    type="text"
+                    placeholder="Type here"
+                    className="input input-bordered w-full max-w-xs"
+                />
+                <input
+                    type="text"
+                    placeholder="Type here"
+                    className="input input-bordered w-full max-w-xs"
+                />
+            </div>
+        </div>
     );
 }
-
-export default App;
